@@ -1,12 +1,18 @@
 import { Bot, InlineKeyboard, InputFile, Keyboard } from "grammy";
+
 import dotenv from "dotenv";
+
 dotenv.config();
 
 const API_TOKEN = process.env.API_TOKEN ? process.env.API_TOKEN : ""; // <-- put your bot token between the ""
 const NAME = process.env.NAME ? process.env.NAME : ""; // <-- put your bot name between the ""
 const LINK = process.env.LINK ? process.env.LINK : "";// <-- put your bot link between the ""
 
-const bot = new Bot(API_TOKEN);
+const bot = new Bot(process.env.API_TOKEN!, {
+    client: {
+      apiRoot: "http://localhost:8081", // tu servidor local de telegram-bot-api
+    },
+  });
 
 bot.command("start", async(ctx) => {
     const chatId = ctx.chatId;
