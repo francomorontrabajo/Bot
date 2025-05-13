@@ -1,6 +1,7 @@
 import { Bot, InlineKeyboard, InputFile, Keyboard } from "grammy";
 
 import dotenv from "dotenv";
+import { error, log } from "console";
 
 dotenv.config();
 
@@ -10,7 +11,7 @@ const LINK = process.env.LINK ? process.env.LINK : "";// <-- put your bot link b
 
 const bot = new Bot(process.env.API_TOKEN!, {
     client: {
-      apiRoot: "http://localhost:8081", // tu servidor local de telegram-bot-api
+      apiRoot: "http://telegram-api:8081", // tu servidor local de telegram-bot-api
     },
   });
 
@@ -123,4 +124,8 @@ bot.on("message:left_chat_member:me", async(ctx) => {
     console.log("Hacer algo antes de irme ...");
 });
 
-bot.start();
+bot.start().then(() => {
+    console.log("Bot corriendo correctamente ");
+}).catch((err) => {
+    console.log("Error al arrancar el bot");
+})

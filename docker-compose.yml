@@ -1,0 +1,17 @@
+services:
+  telegram-api:
+    build:
+      context: ./LocalTelegramServer
+    environment:
+      - TELEGRAM_API_ID=12345678
+      - TELEGRAM_API_HASH=abcd1234efgh5678ijkl9012mnop3456
+    ports:
+      - "8081:8081"
+    restart: unless-stopped
+  
+  bot:
+    build:
+      context: ./Bot
+    depends_on:
+      - telegram-api
+    restart: unless-stopped
