@@ -28,29 +28,15 @@ API_TOKEN=123456:aBcDeF_gHiJkLmNoP-q
 
 ### 4. Obtener el API_ID y API_HASH desde https:my.telegram.org/auth
 
-### 5. Construir la API de Telegram local
+### 5. Ingresar las variables de entorno TELEGRAM_API_ID y TELEGRAM_API_HASH dentro de docker-compose.yml
+
+### 6. Construir el contenedor con la imagen de la api local de telegram y el bot
 ```bash 
-cd ./LocalTelegramServer/
-docker build -t local-telegram-server .
-docker run -it --rm -p 8081:8081 \
+cd docker-compose up --build 
   -e TELEGRAM_API_ID=API_ID \
   -e TELEGRAM_API_HASH=API_HASH \
   local-telegram-server
 ```
 
-### 6. Instalar dependencias
-
-```bash
-cd ..
-npm install
-```
-
-### 7. Correr el bot
-```bash
-npx tsc
-node bot.js  
-```
-
 ## 📝 Notas
-* Asegúrate de que la API local esté corriendo antes de iniciar el bot.
 * El bot fue construido para conectarse exclusivamente a esa API local (no a la pública).
